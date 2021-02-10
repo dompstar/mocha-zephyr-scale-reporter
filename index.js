@@ -25,7 +25,7 @@ function setTestCaseKey(test) {
 }
 
 function writeToJson(data) {
-    fs.writeFileSync('./zephyr-report.json', JSON.stringify(data))
+    fs.writeFileSync('./zephyr-report.json', JSON.stringify(data.filter(x => x !== null)))
 }
 
 
@@ -61,6 +61,6 @@ function MochaZephyrReporter(runner, options) {
 
     runner.on('end', () => {
         console.error(JSON.stringify(cases))
-        writeToJson({ version: 1, executions: cases.filter(x => x !== null) })
+        writeToJson({ version: 1, executions: cases)
     })
 }
