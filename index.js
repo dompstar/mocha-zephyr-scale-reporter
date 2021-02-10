@@ -15,14 +15,13 @@ function setTestCaseKey(test) {
         const testCaseKey = foundTags[1]
         let title = test.title.replace(foundTags[0], "").trim();
 
-        result = {
-            title: title,
+        return {
+            source: title,
             result: test.result,
             testCase: { key: testCaseKey }
         }
     }
-
-    return result;
+    return null
 }
 
 function writeToJson(data) {
@@ -62,6 +61,6 @@ function MochaZephyrReporter(runner, options) {
 
     runner.on('end', () => {
         console.error(JSON.stringify(cases))
-        writeToJson({ version: 1, executions: cases })
+        writeToJson({ version: 1, executions: cases.filter(x => x !== null) })
     })
 }
