@@ -61,6 +61,6 @@ function MochaZephyrReporter(runner, options) {
 
     runner.on('end', () => {
         console.error(JSON.stringify(cases))
-        writeToJson({ version: 1, executions: cases)
+        writeToJson({ version: 1, executions: cases })
     })
 }
